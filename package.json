@@ -1,0 +1,48 @@
+{
+  "name": "@vuelify/vite-plugin-pages",
+  "version": "0.1.3",
+  "description": "Vite plugin for Vue that maps your page routes to the file system with easy over ride feature and layout configuration.",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist",
+    "client.d.ts"
+  ],
+  "scripts": {
+    "compile": "tsc -b tsconfig.json -w ",
+    "test": "mocha --require ts-node/register ./test/*.spec.ts"
+  },
+  "author": "Thomas Edison <vuelify@protonmail.com>",
+  "license": "ISC",
+  "dependencies": {
+    "fast-glob": "^3.2.6",
+    "lodash": "4.17.21"
+  },
+  "peerDependencies": {
+    "vite": "^2.3.8",
+    "vue": "^3.1.5",
+    "vue-router": "^4.0.10"
+  },
+  "devDependencies": {
+    "@types/chai": "^4.2.19",
+    "@types/lodash": "^4.14.170",
+    "@types/mocha": "^8.2.2",
+    "@types/prettier": "^2.3.2",
+    "@vue/compiler-sfc": "^3.1.5",
+    "chai": "^4.3.4",
+    "mocha": "^9.0.1",
+    "prettier": "^2.3.2",
+    "ts-node": "^10.0.0",
+    "typescript": "^4.3.5",
+    "vite": "^2.3.8",
+    "vue-router": "^4.0.10"
+  },
+  "keywords": [
+    "vue",
+    "vite",
+    "prerender",
+    "vuelify",
+    "pages",
+    "plugin"
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "outDir": "./dist",
+    "rootDir": "./src",
+    "declaration": true,
+    "noImplicitAny": false,
+    "esModuleInterop": true,
+    "module": "commonjs",
+    "target": "es6",
+    "lib": ["es6"],
+    "skipLibCheck": true
+  },
+  "exclude": ["node_modules", "dist", "test"]
+}
