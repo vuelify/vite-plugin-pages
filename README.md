@@ -5,9 +5,7 @@ Vite plugin for Vue that maps your page routes to the file system with easy over
 I'm still working on a starter Vuelify template and it's not available publicly at the moment, but you can check out the [live demo here](https://vuelify.netlify.app/)
 
 ```
-
 npm i @vuelify/vite-plugin-pages --save-dev
-
 ```
 
 ## Initial Setup
@@ -15,9 +13,9 @@ npm i @vuelify/vite-plugin-pages --save-dev
 ```javascript
 // ./vite.config.ts
 
-import { defineConfig } from "vite";
-import vue from "@vitejs/plugin-vue";
-import Pages from "@vuelify/vite-plugin-pages";
+import { defineConfig } from 'vite';
+import vue from '@vitejs/plugin-vue';
+import Pages from '@vuelify/vite-plugin-pages';
 
 export default defineConfig({
   plugins: [vue(), Pages()],
@@ -51,11 +49,11 @@ export { routes }
 ```javascript
 // ./src/main.ts
 
-import { createApp } from "vue";
-import App from "./App.vue";
-import { routes } from "./routes";
+import { createApp } from 'vue';
+import App from './App.vue';
+import { routes } from './routes';
 
-createApp(App).use(routes).mount("#app");
+createApp(App).use(routes).mount('#app');
 ```
 
 ## Layout Setup
@@ -71,14 +69,14 @@ Inspired by Nuxt, just add the property to your page component
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent } from 'vue';
 
 export default defineComponent({
   // at run time the layouts will be added and the page will become a
   // a child route of the layout component.
   // If you don't specify this, default.vue will be used
   // If default.vue didn't exist in layout dir, Vue would throw an error
-  layout: "default",
+  layout: 'default',
   setup() {
     return {};
   },
@@ -105,7 +103,7 @@ Altering anything outside of the `layout` or `meta` values isn't a good idea unl
 ```javascript
 {
   extend: (route) => {
-    const unauthenticated = ["Index", "SignIn", "SignUp"];
+    const unauthenticated = ['Index', 'SignIn', 'SignUp'];
 
     if (unauthenticated.includes(route.name)) return {};
 
@@ -120,29 +118,30 @@ Altering anything outside of the `layout` or `meta` values isn't a good idea unl
 
 ### Ignoring Files
 
-You can ignore specific files by placing them in the ignore array. If you have to files of the same name, but only want one to be ignored you can include the parent folder. You can be as specific as you like when traversing the file tree.
+You can ignore specific files by placing them in the ignore array. If you have to files of the same name, but only want one to be ignored you can include the parent folder.
 
 ```javascript
 {
-  ignore: [":userSlug.vue", ":userSlug/settings.vue"];
+  ignore: [':userSlug.vue', ':userSlug/settings.vue'];
 }
 ```
 
 ### Prerendering
 
 This package can be used in conjuction with @vuelify/vite-plugin-prerender to pick and choose what routes you prerender.
+
 Prerendering WILL NOT work without @vuelify/vite-plugin-prerender && @vuelify/cli which are both still under development
 and not meant to be used in the wild at the moment.
 
-If you want to have a play with these packages you can install them still, just run
+If you want to have a play with these packages
 
 ```
 npm i @vuelify/vite-plugin-prerender @vuelify/cli --save-dev
 ```
 
-and add `@vuelify/vite-plugin-prerender` to your `vite.config.ts` file and replace `vite build` with `vuelify` in your package.json
+and add `@vuelify/vite-plugin-prerender` plugin to your `vite.config.ts` file and replace `vite build` with `vuelify` in your `package.json`
 
-These packages arn't coverved by semver and can change at any time
+PLEASE NOTE: These packages arn't covered by semver and can change at any time.
 
 You can prerender a page in two diffrent ways
 
@@ -194,7 +193,7 @@ Add to `vite-env.d.ts` to get typings in your route file when using `import { fs
 ### To Do
 
 - HMR (At the moment you must manually restart the server when you change a pages layout. add/remove pages will automatically restart server)
-- Prerendering (At the moment this package will recognise what you want to prerender but @vuelify/cli @vue/vite-plugin-prerender isn't completed, to have a play around with this feauture see [here](#prerendering) )
+- Prerendering (At the moment this package will recognise what you want to prerender but @vuelify/cli & @vue/vite-plugin-prerender arn't completed, to have a play around with this feauture see [here](#prerendering) )
 
 ### Maintenance & Bugs
 
