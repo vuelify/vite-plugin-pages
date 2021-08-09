@@ -194,6 +194,8 @@ Add to `vite-env.d.ts` to get typings in your route file when using `import { fs
 
 - HMR (At the moment you must manually restart the server when you change a pages layout. add/remove pages will automatically restart server)
 - Prerendering (At the moment this package will recognise what you want to prerender but @vuelify/cli & @vue/vite-plugin-prerender arn't completed, to have a play around with this feauture see [here](#prerendering) )
+- Tests (More unit tests)
+- Catch All Route (At the moment you must configure a catch all route yourself)
 
 ### Maintenance & Bugs
 
