@@ -118,7 +118,7 @@ Altering anything outside of the `layout` or `meta` values isn't a good idea unl
 
 ### Ignoring Files
 
-You can ignore specific files by placing them in the ignore array. If you have to files of the same name, but only want one to be ignored you can include the parent folder.
+You can ignore specific files by placing them in the ignore array. If you have to files of the same name, but only want one to be ignored you can include the parent folder. This is useful when you want to still place pages in correct directly, but want to override the router with your own custom one.
 
 ```javascript
 {
