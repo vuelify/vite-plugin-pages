@@ -1,13 +1,19 @@
 import { Options } from '.';
+import { ResolvedConfig } from 'vite';
 
-export function resolveConfig(userOptions: Options) {
-  const mergeOptions: Options = {
+export interface ResolvedOptions extends Options {
+  root: string;
+}
+
+export function resolveConfig(userOptions: Options, { root }: ResolvedConfig): any {
+  const mergeOptions: ResolvedOptions = {
     layouts: true,
     prerender: true,
     pathToPages: './src/pages',
     pathToLayouts: './src/layouts',
     prerenderFolderName: 'prerender',
     ignore: [],
+    root,
     ...userOptions,
   };
 

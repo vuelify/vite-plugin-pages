@@ -1,13 +1,9 @@
 import type { Plugin } from 'vite';
-import { existsSync, mkdirSync, writeFileSync } from 'fs';
-import { resolve } from 'path';
-import { MODULE_IDS, MODULE_ID_VIRTUAL } from './constants';
-import { getPages } from './getPages';
-import handleHMR from './hmr';
 
+import { MODULE_IDS, MODULE_ID_VIRTUAL } from './constants';
+import handleHMR from './hmr';
+import { PluginAPI } from './plugin';
 import { resolveConfig } from './resolveConfig';
-import { sortRoutes } from './sortRoutes';
-import { stringifyRoutes } from './stringfy';
 
 export interface RouteObject {
   name: string;
@@ -25,7 +21,7 @@ export interface RouteObject {
  */
 export interface Options {
   /**
-   * This path is relative to your vite.config.ts
+   * This path is relative to your vite.config.ts OR the root option if set in vite.config.ts
    * @default "./src/pages"
    */
   pathToPages?: string;
@@ -46,7 +42,7 @@ export interface Options {
    */
   layouts?: boolean;
   /**
-   * This path is relative to your vite.config.ts
+   * This path is relative to your vite.config.ts OR the root option if set in vite.config.ts
    * @default "./src/layouts"
    */
   pathToLayouts?: string;
@@ -67,54 +63,31 @@ export interface Options {
  * with @vuelify/prerender but it is designed to coincide with it.
  */
 
-export default function vuelifyPages(options?: Options): Plugin {
-  const { pathToPages, prerender, pathToLayouts, ignore, extend } = resolveConfig(options);
-
-  let routes = null;
-  let sortedRoutes = null;
-
-  const addRoute = (newRoute: RouteObject) => routes.push(newRoute);
-
-  const removeRoute = (path: string) => (routes = routes.filter((r) => r.filePath !== path));
-
-  const invalidateRoutes = () => (sortedRoutes = null);
-
-  const initalize = async function () {
-    if (!existsSync(resolve('.vuelify'))) mkdirSync(resolve('.vuelify'));
-
-    routes = await getPages(pathToPages, pathToLayouts, ignore, extend);
-
-    sortedRoutes = sortRoutes(routes);
-
-    if (!prerender) return;
-
-    writeFileSync(resolve('.vuelify', 'routes.js'), `exports.default = ${JSON.stringify(routes)}`);
-  };
+export default function vuelifyPages(userOptions?: Options): Plugin {
+  let plugin: PluginAPI;
 
   return {
     name: 'vuelify-pages',
     enforce: 'pre',
-    buildStart() {
-      return initalize();
+    async buildStart() {
+      await plugin.initialize();
+    },
+    configResolved(config) {
+      const options = resolveConfig(userOptions, config);
+      plugin = new PluginAPI(options);
     },
     configureServer(server) {
-      handleHMR(server, invalidateRoutes, addRoute, removeRoute, {
-        pathToLayouts,
-        pathToPages,
-        extend,
-      });
+      handleHMR(server, plugin);
     },
     resolveId(id: string) {
       return MODULE_IDS.includes(id) || MODULE_IDS.some((i) => id.startsWith(i))
         ? MODULE_ID_VIRTUAL
         : null;
     },
-    async load(id: string) {
+    load(id: string) {
       if (id !== MODULE_ID_VIRTUAL) return;
 
-      if (sortedRoutes === null) sortedRoutes = sortRoutes(routes);
-
-      return `export const fsRoutes = ${stringifyRoutes(sortedRoutes)} `;
+      return plugin.loadRoutes();
     },
   };
 }

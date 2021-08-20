@@ -16,7 +16,6 @@ export function getRouteName(path: string) {
 
 export const getRouterPath = (filePath: string, pathToPages: string) =>
   filePath
-    .replace(process.cwd(), '')
     .replace(pathToPages, '')
     .replace('.vue', '')
     .replace('/prerender', '')
