@@ -1,4 +1,5 @@
 import { should } from 'chai';
+import { resolve } from 'path';
 import { getPages } from '../src/getPages';
 
 should();
@@ -20,7 +21,12 @@ function checkRouterObject(
 
 describe('getPages(pathToPages: string)', function () {
   it('correctly parses index file path into a router object', async function () {
-    const pages = await getPages('./test/pages', './test/layouts', [], undefined);
+    const pages = await getPages(
+      resolve(process.cwd(), './test/pages'),
+      './test/layouts',
+      [],
+      undefined,
+    );
     const [index, spa] = pages;
 
     checkRouterObject(index, {
@@ -34,7 +40,12 @@ describe('getPages(pathToPages: string)', function () {
   });
 
   it('correctly parses spa file path into a router object', async function () {
-    const pages = await getPages('./test/pages', './test/layouts', [], undefined);
+    const pages = await getPages(
+      resolve(process.cwd(), './test/pages'),
+      './test/layouts',
+      [],
+      undefined,
+    );
     const [index, spa] = pages;
 
     checkRouterObject(spa, {
