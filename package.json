@@ -1,6 +1,6 @@
 {
   "name": "@vuelify/vite-plugin-pages",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "description": "Vite plugin for Vue that maps your page routes to the file system with easy over ride feature and layout configuration.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
