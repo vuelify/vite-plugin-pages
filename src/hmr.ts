@@ -41,8 +41,6 @@ export default function handleHMR(server: ViteDevServer, plugin: PluginAPI) {
   });
 
   watcher.on('unlink', (path) => {
-    console.log(isRelevantChange(path));
-
     if (isRelevantChange(path)) {
       plugin.removeRoute(path);
       plugin.invalidateRoutes();
