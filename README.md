@@ -130,41 +130,7 @@ You can ignore specific files by placing them in the ignore array. If you have t
 
 This package can be used in conjuction with @vuelify/vite-plugin-prerender to pick and choose what routes you prerender.
 
-Prerendering WILL NOT work without @vuelify/vite-plugin-prerender && @vuelify/cli which are both still under development
-and not meant to be used in the wild at the moment.
-
-If you want to have a play with these packages
-
-```
-npm i @vuelify/vite-plugin-prerender @vuelify/cli --save-dev
-```
-
-and add `@vuelify/vite-plugin-prerender` plugin to your `vite.config.ts` file and replace `vite build` with `vuelify` in your `package.json`
-
-PLEASE NOTE: These packages arn't covered by semver and can change at any time.
-
-You can prerender a page in two diffrent ways
-
-- Prefix the filename with $ `*/src/pages/$index.vue`
-- Put the file within the folder `*/src/pages/prerender/static-page.vue`
-
-The pages will be mapped to the file system, obviously ignoring the prerender folder
-
-`./src/pages/$index > /`
-
-`./src/pages/prerender/$about.vue > /about`
-
-`./src/pages/prerender/blog/blog.vue > /blog`
-
-`./src/pages/prerender/blog/:blogPostId.vue > /blog/:blogPostId`
-
-The plugin will also create a .vuelify folder in the same directory as your vite.config.ts and dump a routes.js file within it.
-
-routes.js is soley used by @vuelify/prerender in the build stage and won't be generated if prerendering is turned off.
-
-This can be done by explictly turning it off in options.
-
-Any other files included in your pages directory will be considered part of the SPA and rendered accordingly.
+**COMING SOON**
 
 ### Options
 
