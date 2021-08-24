@@ -12,7 +12,7 @@
     "url": "https://github.com/vuelify/vite-plugin-pages"
   },
   "scripts": {
-    "publish": "npm publish --acess public",
+    "publish": "npm publish --access public",
     "compile": "tsc -b tsconfig.json -w ",
     "test": "mocha --require ts-node/register ./test/*.spec.ts"
   },
