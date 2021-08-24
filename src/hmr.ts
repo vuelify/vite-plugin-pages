@@ -30,8 +30,8 @@ export default function handleHMR(server: ViteDevServer, plugin: PluginAPI) {
 
   watcher.on('add', (path) => {
     if (isRelevantChange(path)) {
-      const { pathToPages, pathToLayouts, extend } = plugin.options;
-      const newPage = addPage(path, pathToPages, pathToLayouts, extend);
+      const { pathToPages, pathToLayouts, extend, base } = plugin.options;
+      const newPage = addPage(path, pathToPages, pathToLayouts, extend, base);
 
       plugin.addRoute(newPage);
       plugin.invalidateRoutes();

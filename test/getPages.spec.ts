@@ -20,11 +20,12 @@ function checkRouterObject(
 }
 
 describe('getPages(pathToPages: string)', function () {
-  it('correctly parses index file path into a router object', async function () {
+  it('correctly parses prerended $index file path into a router object', async function () {
     const pages = await getPages(
       resolve(process.cwd(), './test/pages'),
       './test/layouts',
       [],
+      undefined,
       undefined,
     );
     const [index, spa] = pages;
@@ -44,6 +45,7 @@ describe('getPages(pathToPages: string)', function () {
       resolve(process.cwd(), './test/pages'),
       './test/layouts',
       [],
+      undefined,
       undefined,
     );
     const [index, spa] = pages;

@@ -9,6 +9,7 @@ export async function getPages(
   pathToLayouts: string,
   ignore: string[],
   extend: (route: RouteObject) => Partial<RouteObject> | void,
+  base: string,
 ) {
   const pages = await FastGlob(`${normalizedResolve(process.cwd(), pathToPages)}/**/*.vue`);
 
@@ -19,7 +20,7 @@ export async function getPages(
 
   const routes: RouteObject[] = pages
     .filter((path) => filterIgnored(path))
-    .map((filePath: string) => addPage(filePath, pathToPages, pathToLayouts, extend));
+    .map((filePath: string) => addPage(filePath, pathToPages, pathToLayouts, extend, base));
 
   return routes;
 }

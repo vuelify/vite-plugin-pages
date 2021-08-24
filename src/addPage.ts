@@ -34,10 +34,10 @@ const isPrerendered = (filePath: string) => {
   };
 };
 
-export function checkParentRoute(routePath: string) {
+export function checkParentRoute(routePath: string, base: string) {
   if (!routePath)
     return {
-      path: '/',
+      path: base ? base : '/',
       base: 'root',
       isChild: false,
     };
@@ -46,7 +46,7 @@ export function checkParentRoute(routePath: string) {
 
   if (segments.length === 2)
     return {
-      path: cleanPath,
+      path: base ? base + cleanPath.replace('/', '') : cleanPath,
       base: cleanPath.replace('/', '') || 'root',
       isChild: false,
     };
@@ -60,7 +60,7 @@ export function checkParentRoute(routePath: string) {
   }
 
   return {
-    path: cleanPath,
+    path: base ? base + cleanPath.replace('/', '') : cleanPath,
     base: segments[1],
     isChild: true,
   };
@@ -73,6 +73,7 @@ export function addPage(
   pathToPages: string,
   pathToLayouts: string,
   extend: (route: RouteObject) => Partial<RouteObject> | void,
+  base: string,
 ) {
   const pagesPath = pathToPages.replace('.', '');
   const sfc = readFileSync(filePath, { encoding: 'utf-8' });
@@ -88,7 +89,7 @@ export function addPage(
     meta: {
       ...isPrerendered(filePath),
     },
-    ...checkParentRoute(routePath),
+    ...checkParentRoute(routePath, base),
   };
 
   const extender = extend?.(systemRoute) || {};

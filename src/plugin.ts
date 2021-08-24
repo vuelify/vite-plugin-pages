@@ -10,7 +10,7 @@ import { RouteObject } from '.';
 
 export class PluginAPI {
   routes: null | RouteObject[];
-  sortedRoutes: null | Partial<RouteRecord>[];
+  sortedRoutes: null | Partial<RouteRecord | RouteObject>[];
   options: ResolvedOptions;
 
   constructor(config: ResolvedOptions) {
@@ -29,6 +29,7 @@ export class PluginAPI {
       this.options.pathToLayouts,
       this.options.ignore,
       this.options.extend,
+      this.options.base,
     );
 
     this.sortedRoutes = sortRoutes(this.routes);

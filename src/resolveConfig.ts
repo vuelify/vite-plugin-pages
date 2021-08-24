@@ -3,9 +3,10 @@ import { ResolvedConfig } from 'vite';
 
 export interface ResolvedOptions extends Options {
   root: string;
+  base: string;
 }
 
-export function resolveConfig(userOptions: Options, { root }: ResolvedConfig): any {
+export function resolveConfig(userOptions: Options, { root, base }: ResolvedConfig): any {
   const mergeOptions: ResolvedOptions = {
     layouts: true,
     prerender: true,
@@ -14,6 +15,7 @@ export function resolveConfig(userOptions: Options, { root }: ResolvedConfig): a
     prerenderFolderName: 'prerender',
     ignore: [],
     root,
+    base,
     ...userOptions,
   };
 
