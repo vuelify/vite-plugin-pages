@@ -128,7 +128,7 @@ You can ignore specific files by placing them in the ignore array. If you have t
 
 ### Prerendering
 
-This package can be used in conjuction with @vuelify/vite-plugin-prerender to pick and choose what routes you prerender.
+This package can be used in conjunction with @vuelify/vite-plugin-prerender to pick and choose what routes you prerender.
 
 **COMING SOON**
 
@@ -159,7 +159,7 @@ Add to `vite-env.d.ts` to get typings in your route file when using `import { fs
 ### To Do
 
 - HMR (At the moment you must manually restart the server when you change a pages layout. add/remove pages will automatically restart server)
-- Prerendering (At the moment this package will recognise what you want to prerender but @vuelify/cli & @vue/vite-plugin-prerender arn't completed, to have a play around with this feauture see [here](#prerendering) )
+- Prerendering (At the moment this package will recognise what you want to prerender but @vuelify/cli & @vue/vite-plugin-prerender aren't completed, to have a play around with this feature see [here](#prerendering) )
 - Tests (More unit tests)
 - Catch All Route (At the moment you must configure a catch all route yourself)
 
